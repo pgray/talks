@@ -25,22 +25,6 @@ author: Patrick Gray - pgray
 
 <!-- end_slide -->
 
-# whoami - experience
-
-- computer engineer
-  - devops
-  - SRE
-  - platform
-- mainly worked at small companies or startups
-  - series A/B, seed, or immediately post-purchase
-  - some consult/contract work (AWS/Linux)
-- first language: C (but not a ton)
-- linux automation: bash, terraform (HCL), yaml, json, etc
-- tools: docker, kubernetes, nomad, GCP, AWS, Digital Ocean, etc
-- first work language: Go
-
-<!-- end_slide -->
-
 # fp: file.photo - late 2023
 
 - google photos for RAW files (CR2, RAF, NEF, etc.)
@@ -61,19 +45,9 @@ author: Patrick Gray - pgray
 
 - limitations
   - micro-SaaS/indiehacker project (solo work)
-  - learning a lot of stuff about rust as i went
+  - learning a lot of stuff about rust on the fly
+- started free claude.ai usage (chat)
   - no claude code
-- started free claude.ai usage
-
-<!-- end_slide -->
-
-# fp:
-
-- cloudflare worker wasm binary?
-  - was too hard... too much googling
-  - even ai help wasn't amazing (pre claude code)
-- take advantage of hetzner traffic quotas
-  - tiny CPU but tons of network throughput
 
 <!-- end_slide -->
 
@@ -88,75 +62,55 @@ author: Patrick Gray - pgray
 
 <!-- end_slide -->
 
-# fp: thumbhack example
-
-```go
-func (inst *Instance) RunExif(kv nats.KeyValue, img, tmpimg string) error {
-    // setup exec...
-    cmd := exec.Command("exiftool", tmpimg, "-json")
-    // grab pipe for output
-    pipe, err := cmd.StdoutPipe()
-    if err != nil {
-        return err
-    }
-    go func() {
-        err = cmd.Run()
-        lol.Sad(err)
-    }()
-    // read all stdout
-    raw, err := io.ReadAll(pipe)
-    if err != nil {
-        return err
-    }
-    // save to kv store
-    _, err = inst.obs.Put(&nats.ObjectMeta{Name: Fmtexif(img), Description: img}, bytes.NewBuffer(raw))
-    if err != nil {
-        return err
-    }
-    // process exif raw to generate kv
-    processed := Wrapper{}
-    err = json.Unmarshal(raw, &processed)
-    if err != nil {
-        return err
-    }
-// ...
-}
-```
-
-<!-- end_slide -->
-
-# exiftool, exiv2, and dcraw
+# fp: exiftool, exiv2, and dcraw
 
 - exiftool -- `perl`
   - `exiftool -j $raw_file > raw_file_exif.json`
 - dcraw -- `c`
+  - libraw
 - exiv2 -- `c++`
   - `exiv2`
 
 <!-- end_slide -->
 
+# fp: to backburner
+
+- burnt out
+- built most of billing (storage tracking)
+- got some contract work doing devops/sre/etc
+
+<!-- end_slide -->
+
 # aiaw: AI aided work
 
-- completions
-- prompts
+- zed.dev
+  - completions
+  - prompts
 - github PR review bots
+  - cursor
+- claude code
 
 <!-- end_slide -->
 
 # aiaw: fpexif
 
-- fpexif
+- tmpdns
+- vibes.bingo
+- `fpexif`
   - exiv2
   - exiftool
   - [raw samples](rawsamples.ch)
-- tmpdns
-- vibes.bingo
 
 <!-- end_slide -->
 
-# exiftool hack
+# aiaw:
 
----
+- MADstack
+  - claude-friendly maud+axum+diesel framework
+  - if AI is going to write most of the code, no need for a framework other than good libraries
+  - "if you're going to make things easy with AI, do it the hard way with rust"
+
+<!-- end_slide -->
 
 # conclusion:
 
