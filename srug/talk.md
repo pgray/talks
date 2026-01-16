@@ -332,6 +332,7 @@ understanding of metadata to support such an undertaking.
 
 # conclusion: cont.
 
+- happy birthday Robin (turning 75 on Sunday)
 - "embarassingly parallel" problems...
   - "embarassingly AI-solveable" problems...
   - high existing input data
